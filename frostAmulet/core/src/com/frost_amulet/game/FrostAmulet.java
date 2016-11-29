@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frost_amulet.game.com.frost_amulet.game.states.MenuState;
 import com.frost_amulet.game.com.frost_amulet.game.states.State;
 
+import java.awt.*;
+
 
 public class FrostAmulet extends ApplicationAdapter {
 
@@ -18,7 +20,11 @@ public class FrostAmulet extends ApplicationAdapter {
     /** gameStates array holds the game states, constructured in the create method of the FrostAmulet class */
     private State[] gameStates;
 
-    SpriteBatch batch;
+    private SpriteBatch batch;
+
+    private int gameHeight;
+    private int gameWidth;
+
 
     @Override
 	public void create () {
@@ -26,9 +32,14 @@ public class FrostAmulet extends ApplicationAdapter {
         /** Obligatory graphics object, passed to each state upoin construction in the create method fo the FrostAmulet class */
         batch = new SpriteBatch();
 
+        gameHeight = Handler.getGameHeight();
+        gameWidth = Handler.getGameWidth();
+
+        Handler.setBatch(batch);
+        Handler.setGame(this);
 
         /** Creation of all the game states in the game, passing in the graphics object batch*/
-        State[] gameStates = {new MenuState(batch)}; //, new OverworldState, EncounterState, }
+        State[] gameStates = {new MenuState()}; //, new OverworldState, EncounterState, }
 
         /** Dirty work around, I wasn't able to move the game state initializer up above the create class due to batch, and so this is required for the render method to access it */
         this.gameStates = gameStates;
@@ -74,5 +85,6 @@ public class FrostAmulet extends ApplicationAdapter {
 	public CurrentState getCurrentState(){
 	    return currentState;
     }
+
 
 }
