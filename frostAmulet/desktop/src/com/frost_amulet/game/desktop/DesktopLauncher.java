@@ -7,8 +7,8 @@ import com.frost_amulet.game.Handler;
 
 public class DesktopLauncher {
 
-    private static final int GAME_WIDTH = 600;
-    private static final int GAME_HEIGHT = 600;
+    private static final int GAME_WIDTH = 1600;
+    private static final int GAME_HEIGHT = 900;
 
 	public static void main (String[] arg) {
 

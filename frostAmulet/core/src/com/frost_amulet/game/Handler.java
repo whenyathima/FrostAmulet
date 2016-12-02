@@ -1,6 +1,8 @@
 package com.frost_amulet.game;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 
 /**
  * Created by dev on 29/11/16.
@@ -10,6 +12,7 @@ public class Handler {
     private static int height;
     private static int width;
     private static SpriteBatch batch;
+    private static BitmapFont font;
     private static FrostAmulet game;
 
     public static void Handler(){
@@ -37,6 +40,13 @@ public class Handler {
     }
     public static void setBatch(SpriteBatch batch){
         Handler.batch = batch;
+    }
+
+    public static BitmapFont getFont(){
+        return font;
+    }
+    public static void setFont(BitmapFont font){
+        Handler.font = font;
     }
 
     public static FrostAmulet getGame(){
