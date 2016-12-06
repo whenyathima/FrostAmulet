@@ -47,13 +47,8 @@ public class FrostAmulet extends Game {
         Gdx.gl.glClearColor(1, 0, 0, 1);                    //Clear the screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);           //Causes the screen to flicker when removed
 
-       // currentScreen.tick();
-
-        batch.begin();
-
         super.render();
 
-        batch.end();
 
 
 

@@ -3,6 +3,7 @@ package com.frost_amulet.game.come.frost_amulet.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.frost_amulet.game.FrostAmulet;
 
 /**
@@ -12,6 +13,12 @@ public class MainMenuScreen implements Screen {
 
     FrostAmulet game;
     Texture img;
+
+    boolean LMBPressed;
+    int mousePosX;
+    int mousePosY;
+
+
 
     int tickCounter = 1;
 
@@ -26,15 +33,46 @@ public class MainMenuScreen implements Screen {
 
     }
 
-    public void tick(){
-        tickCounter += 1;
-    }
-
     @Override
     public void render(float delta) {
-       // game.batch.begin();
+
+        tick();
+
+        game.batch.begin();
+
         game.batch.draw(img, 0, 0);
-       // game.batch.end();
+
+        game.batch.end();
+    }
+
+
+    private void tick(){
+        //reset mouse
+        resetMouse();
+        //check mouse position
+        //compare to buttons
+        //check mouse click
+    }
+
+    public boolean touchDown(InputEvent event,
+                             float x,
+                             float y,
+                             int pointer,
+                             int button){
+        x = mousePosX;
+        y = mousePosY;
+        if (button ==0){
+            LMBPressed = true;
+        }
+
+
+
+
+        return true;
+    }
+
+    private void resetMouse(){
+        LMBPressed = false;
     }
 
     @Override
