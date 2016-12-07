@@ -1,5 +1,6 @@
 package com.frost_amulet.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
@@ -15,7 +16,9 @@ public class Handler {
     private static BitmapFont font;
     private static FrostAmulet game;
 
-    public static void Handler(){
+    public static void Start(){
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
 
     }
 

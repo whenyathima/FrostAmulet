@@ -1,64 +1,53 @@
 package com.frost_amulet.game;
 
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.frost_amulet.game.come.frost_amulet.game.screens.MainMenuScreen;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
-
-public class FrostAmulet extends Game {
-
-
-    /** gameStates array holds the game states, constructured in the create method of the FrostAmulet class */
-    public SpriteBatch batch;
-    public BitmapFont font;
-
-    private int gameHeight;
-    private int gameWidth;
-
-    Screen currentScreen;
-
+public class FrostAmulet extends ApplicationAdapter {
+    private OrthographicCamera camera;
+    private SpriteBatch batch;
+    private BitmapFont font;
+    private float w,h;
 
     @Override
-	public void create () {
+    public void create () {
 
-        /** Obligatory graphics object, passed to each state upoin construction in the create method fo the FrostAmulet class */
-        batch = new SpriteBatch();
-        font = new BitmapFont();
+        Handler.Start();
 
-        gameHeight = Handler.getGameHeight();
-        gameWidth = Handler.getGameWidth();
+        w = Handler.getGameWidth(); // width of screen
+        h = Handler.getGameHeight(); // height of screen
 
-        Handler.setBatch(batch);
-        Handler.setFont(font);
-        Handler.setGame(this);
+        camera = new OrthographicCamera(); // 2D camera
+        camera.setToOrtho(false, w, h); // y increases upwards, viewport = window
+        batch = new SpriteBatch(); // batch drawing
 
-        this.setScreen(currentScreen = new MainMenuScreen(this));
-
-        // Add in all the loading code here
-
-	}
-
-	@Override
-    public void render (){
-
-
-        Gdx.gl.glClearColor(1, 0, 0, 1);                    //Clear the screen
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);           //Causes the screen to flicker when removed
-
-        super.render();
-
-
-
-
-
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("core/assets/fonts/AnglosaxOblique.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 50;
+        parameter.color = Color.BLACK;
+        font = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
 
     }
-	
-	@Override
-	public void dispose () {
 
-	}
+    @Override
+    public void render () {
+        Gdx.gl.glClearColor(1, 1, 0, 1); // Clear color is yellow
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear buffer with Clear color
+        batch.setProjectionMatrix(camera.combined); // Set Projection Matrix
+        batch.begin(); // begin drawing
+        font.draw(batch, "Hello World", w/2-180, h/2+50); // Draw the Hello World text
+        batch.end(); // end drawing
+    }
 
+    @Override
+    public void dispose() {
+        batch.dispose(); // remove batch when app ending
+        font.dispose(); // remove font when app ending
+    }
 }
